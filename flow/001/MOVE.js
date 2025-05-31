@@ -7,6 +7,7 @@ var request = require('request');
 const { jsPDF } = require("jspdf");
 const pdf2base64 = require('pdf-to-base64');
 var fs = require('fs');
+var fsm = require('fs-extra')
 
 
 
@@ -342,7 +343,7 @@ router.post('/moveflodertoset/HESISN', async (req, res) => {
   }
   for (let i = 0; i < infloder.length; i++) {
 
-    fs.move(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\TESTPLANT\\${infloder[i]}`, `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Inputtest`, function (err) {
+    fsm.move(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\TESTPLANT\\${infloder[i]}`, `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Inputtest`, function (err) {
       if (err) return console.error(err)
       console.log("success!")
     })
