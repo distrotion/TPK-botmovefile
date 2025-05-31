@@ -322,11 +322,17 @@ router.post('/moveflodertoset/HESISN', async (req, res) => {
   let input = req.body;
   //-------------------------------------
   let output = [];
+  let infloder = [];
 
   const folderPath = '\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN';
   let listorderfile = fs.readdirSync(folderPath);
   for (let i = 0; i < listorderfile.length; i++) {
-    output.push(fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`))
+    let orderlist = [];
+    // infloder.push(fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`))
+    orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`)
+    if(orderlist.length>2){
+      console.log(`${listorderfile[i]}`);
+    }
     
   }
  
