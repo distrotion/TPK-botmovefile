@@ -8,6 +8,8 @@ const { jsPDF } = require("jspdf");
 const pdf2base64 = require('pdf-to-base64');
 var fs = require('fs');
 
+
+
 Number.prototype.pad = function (n) {
   if (n === undefined)
     n = 2;
@@ -324,16 +326,26 @@ router.post('/moveflodertoset/HESISN', async (req, res) => {
   let output = [];
   let infloder = [];
 
-  const folderPath = '\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN';
+  // const folderPath = '\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN';
+   const folderPath = '\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\TESTPLANT';
   let listorderfile = fs.readdirSync(folderPath);
   for (let i = 0; i < listorderfile.length; i++) {
     let orderlist = [];
     // infloder.push(fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`))
-    orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`)
+    // orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`)
+        orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\TESTPLANT\\${listorderfile[i]}`)
     if (orderlist.length >= 2) {
       console.log(`${listorderfile[i]}`);
       infloder.push(`${listorderfile[i]}`)
     }
+
+  }
+  for (let i = 0; i < infloder.length; i++) {
+
+    fs.move(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\TESTPLANT\\${infloder[i]}`, `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Inputtest`, function (err) {
+      if (err) return console.error(err)
+      console.log("success!")
+    })
 
   }
 
