@@ -318,9 +318,9 @@ router.post('/RAWDATA/sapget', async (req, res) => {
 });
 
 
-router.post('/moveflodertoset/HESISN', async (req, res) => {
+router.post('/moveflodertoset/TESTPLANT', async (req, res) => {
   //-------------------------------------
-  console.log("--moveflodertoset/HESISN'--");
+  console.log("--moveflodertoset/TESTPLANT'--");
   console.log(req.body);
   let input = req.body;
   //-------------------------------------
