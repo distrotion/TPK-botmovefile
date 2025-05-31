@@ -344,9 +344,9 @@ router.post('/moveflodertoset/HESISN', async (req, res) => {
   for (let i = 0; i < infloder.length; i++) {
 
     dir = `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Inputtest\\${infloder[i]}`;
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
+    // if (!fs.existsSync(dir)) {
+    //   fs.mkdirSync(dir, { recursive: true });
+    // }
     fsm.move(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\TESTPLANT\\${infloder[i]}`, dir, function (err) {
       if (err) return console.error(err)
       console.log("success!")
