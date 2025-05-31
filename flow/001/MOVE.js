@@ -158,7 +158,7 @@ router.post('/genfloder', async (req, res) => {
 
     var dir = ``;
     if (`${input['PO']}`.length > 4) {
-       if (`${input['PO']}`.substring(0, 3) === '211' || `${input['PO']}`.substring(0, 3) === '212') {
+      if (`${input['PO']}`.substring(0, 3) === '211' || `${input['PO']}`.substring(0, 3) === '212') {
         dir = `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\BP12PH\\${input['PO']}`;
       }
 
@@ -330,13 +330,14 @@ router.post('/moveflodertoset/HESISN', async (req, res) => {
     let orderlist = [];
     // infloder.push(fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`))
     orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`)
-    if(orderlist.length>=2){
+    if (orderlist.length >= 2) {
       console.log(`${listorderfile[i]}`);
+      infloder.push(`${listorderfile[i]}`)
     }
-    
-  }
- 
 
+  }
+
+  output = infloder;
 
   //-------------------------------------
   return res.json(output);
