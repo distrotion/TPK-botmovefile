@@ -324,7 +324,11 @@ router.post('/moveflodertoset/HESISN', async (req, res) => {
   let output = [];
 
   const folderPath = '\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN';
-  output = fs.readdirSync(folderPath);
+  let listorderfile = fs.readdirSync(folderPath);
+  for (let i = 0; i < listorderfile.length; i++) {
+    output.push(fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`))
+    
+  }
  
 
 
