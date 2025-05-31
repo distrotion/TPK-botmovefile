@@ -360,6 +360,54 @@ router.post('/moveflodertoset/TESTPLANT', async (req, res) => {
   return res.json(output);
 });
 
+router.post('/moveflodertoset/ALLPLANT', async (req, res) => {
+  //-------------------------------------
+  console.log("--moveflodertoset/ALLPLANT'--");
+  console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = [];
+  let infloder = [];
+
+  if(input['PLANT']!= undefined){
+
+ 
+
+  // const folderPath = '\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN';
+   const folderPath = `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\${input['PLANT']}`;
+  let listorderfile = fs.readdirSync(folderPath);
+  for (let i = 0; i < listorderfile.length; i++) {
+    let orderlist = [];
+    // infloder.push(fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`))
+    // orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\HESISN\\${listorderfile[i]}`)
+        orderlist = fs.readdirSync(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\${input['PLANT']}\\${listorderfile[i]}`)
+    if (orderlist.length >= 2) {
+      console.log(`${listorderfile[i]}`);
+      infloder.push(`${listorderfile[i]}`)
+    }
+
+  }
+  for (let i = 0; i < infloder.length; i++) {
+
+    dir = `\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Input\\${infloder[i]}`;
+    // if (!fs.existsSync(dir)) {
+    //   fs.mkdirSync(dir, { recursive: true });
+    // }
+    fsm.move(`\\\\172.20.10.150\\sap_s4hana\\S4PRD\\HSORDERSHEET_PP\\Output\\${input['PLANT']}\\${infloder[i]}`, dir, function (err) {
+      if (err) return console.error(err)
+      console.log("success!")
+    })
+
+  }
+
+   }
+
+  output = infloder;
+
+  //-------------------------------------
+  return res.json(output);
+});
+
 module.exports = router;
 
 
